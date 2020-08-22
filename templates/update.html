@@ -1,0 +1,36 @@
+{% extends 'base.html'%}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+
+{% if contact.manager == request.user %}
+Edit {{Contact}}
+     {% else %}  
+       you don't have access to this page
+        
+     {% endif %}
+
+
+{% endblock %}
+{% block content%}
+
+
+{% if contact.manager == request.user %}
+<div class="container">
+<h2 class="heading font-weight-light text-center">Update {{Contact}}</h2>
+<hr>
+</div>
+<div class="container w-25 card p-4 mt-4">
+<form action="" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+{{form | crispy }}
+<input type="submit" value="update" class="w-100 text-wight text-center my-2 btn btn-info ">
+</form>
+</div>
+{% else %}  
+<div class="container">
+       <h2 class="heading font-weight-light text-center">you don't have access to this page </h2>
+       <hr />
+     </div>
+{% endif %}
+{% endblock %}
